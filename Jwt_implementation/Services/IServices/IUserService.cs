@@ -8,5 +8,8 @@ namespace Jwt_implementation.Services.IServices
     public interface IUserService
     {
         Task<UserResponseDto> Register(UserRegisterDto userRegisterDto);
+
+
+        Task<LoginResponseDto> Login(LoginDto userLoginDto);
     }
 }

@@ -27,7 +27,28 @@ namespace Jwt_implementation.Controllers
             }
             //return the result
             return Ok(result);
-
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            try
+            {
+                var result = await _userService.Login(loginDto);
+                return Ok(new
+                {
+                    message="Login successful",
+                    token=result.Token,
+                    user=result.User
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = "Login failed",
+                    error = ex.Message
+                });
+            }
         }
     }
 }
