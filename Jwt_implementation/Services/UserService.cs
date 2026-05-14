@@ -125,7 +125,6 @@ namespace Jwt_implementation.Services
             //signature
 
             //create the token
-
             var token = new JwtSecurityToken(
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
@@ -133,9 +132,6 @@ namespace Jwt_implementation.Services
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials
             );
-
-
-
             //convert the token object to string and return it
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
