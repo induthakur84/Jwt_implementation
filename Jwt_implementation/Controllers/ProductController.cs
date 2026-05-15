@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jwt_implementation.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -17,7 +18,7 @@ namespace Jwt_implementation.Controllers
             _productService = productService;
         }
         [HttpPost("create")]
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ProductCreateDto productCreateDto)
         {
             var result = await _productService.Create(productCreateDto);
@@ -28,14 +29,14 @@ namespace Jwt_implementation.Controllers
             return Ok(result);
         }
         [HttpGet("getall")]
-        [Authorize("User, Admin")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _productService.GetAll();
             return Ok(result);
         }
         [HttpGet("getbyid/{id}")]
-        [Authorize("User, Admin")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _productService.GetById(id);
